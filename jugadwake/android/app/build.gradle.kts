@@ -8,8 +8,8 @@ plugins {
 android {
     namespace = "com.example.jugadwake"
     compileSdk = flutter.compileSdkVersion
-    // Use a version that's compatible with permission_handler but available on the system
-    ndkVersion = "26.3.11579264"
+    // Use a version that's compatible with permission_handler
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -42,4 +42,12 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Lottie animation library
+    implementation("com.airbnb.android:lottie:6.1.0")
+
+    // AppCompat for JarvisLockActivity
+    implementation("androidx.appcompat:appcompat:1.6.1")
 }
