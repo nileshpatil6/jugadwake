@@ -24,9 +24,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
       'wakeWordAccuracy': 92,
     },
     'achievements': [
-      {'name': 'Early Bird', 'description': '7 days morning streak', 'progress': 0.7},
-      {'name': 'Task Master', 'description': '100 tasks completed', 'progress': 0.28},
-      {'name': 'Perfect Week', 'description': 'All tasks completed this week', 'progress': 0.85},
+      {
+        'name': 'Early Bird',
+        'description': '7 days morning streak',
+        'progress': 0.7,
+      },
+      {
+        'name': 'Task Master',
+        'description': '100 tasks completed',
+        'progress': 0.28,
+      },
+      {
+        'name': 'Perfect Week',
+        'description': 'All tasks completed this week',
+        'progress': 0.85,
+      },
     ],
   };
 
@@ -52,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    
+
     return Scaffold(
       backgroundColor: AppTheme.background,
       appBar: AppBar(
@@ -147,26 +159,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 32),
 
             // Achievements Section
-            Text(
-              'Achievements',
-              style: theme.textTheme.headlineSmall,
-            ),
+            Text('Achievements', style: theme.textTheme.headlineSmall),
             const SizedBox(height: 16),
-            ..._profileData['achievements'].map<Widget>((achievement) => 
-              _buildAchievementCard(
-                achievement['name'],
-                achievement['description'],
-                achievement['progress'],
-                theme,
-              ),
-            ).toList(),
+            ..._profileData['achievements']
+                .map<Widget>(
+                  (achievement) => _buildAchievementCard(
+                    achievement['name'],
+                    achievement['description'],
+                    achievement['progress'],
+                    theme,
+                  ),
+                )
+                .toList(),
             const SizedBox(height: 32),
 
             // Settings Section
-            Text(
-              'Settings',
-              style: theme.textTheme.headlineSmall,
-            ),
+            Text('Settings', style: theme.textTheme.headlineSmall),
             const SizedBox(height: 16),
             _buildSettingsCard(theme),
             const SizedBox(height: 24),
@@ -199,10 +207,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   double _calculateTaskProgress() {
-    return _profileData['stats']['tasksCompleted'] / _profileData['stats']['tasksTotal'];
+    return _profileData['stats']['tasksCompleted'] /
+        _profileData['stats']['tasksTotal'];
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, double progress, ThemeData theme, {Color? accentColor}) {
+  Widget _buildStatCard(
+    String title,
+    String value,
+    IconData icon,
+    double progress,
+    ThemeData theme, {
+    Color? accentColor,
+  }) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -225,15 +241,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text(title, style: theme.textTheme.bodySmall),
                 const SizedBox(height: 4),
                 LinearProgressIndicator(
                   value: progress,
                   backgroundColor: AppTheme.background,
-                  valueColor: AlwaysStoppedAnimation<Color>(accentColor ?? AppTheme.primary),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    accentColor ?? AppTheme.primary,
+                  ),
                   borderRadius: BorderRadius.circular(4),
                 ),
               ],
@@ -244,7 +259,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildAchievementCard(String title, String description, double progress, ThemeData theme) {
+  Widget _buildAchievementCard(
+    String title,
+    String description,
+    double progress,
+    ThemeData theme,
+  ) {
     return Card(
       child: ListTile(
         contentPadding: const EdgeInsets.all(16),
@@ -256,7 +276,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               '${(progress * 100).toInt()}%',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: progress == 1.0 ? AppTheme.accent2 : AppTheme.textLight,
-                fontWeight: progress == 1.0 ? FontWeight.bold : FontWeight.normal,
+                fontWeight:
+                    progress == 1.0 ? FontWeight.bold : FontWeight.normal,
               ),
             ),
           ],
@@ -298,7 +319,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const Divider(height: 1),
           SwitchListTile(
-            title: Text('Wake Word Detection', style: theme.textTheme.bodyLarge),
+            title: Text(
+              'Wake Word Detection',
+              style: theme.textTheme.bodyLarge,
+            ),
             value: _isWakeWordEnabled,
             activeColor: AppTheme.primary,
             onChanged: (bool value) {
