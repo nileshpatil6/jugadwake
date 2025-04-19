@@ -26,6 +26,8 @@ void overlayMain() {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -76,10 +78,11 @@ class _MyAppState extends State<MyApp> {
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-    if (platformVersion != null)
+    if (platformVersion != null) {
       setState(() {
         _platformVersion = platformVersion!;
       });
+    }
   }
 
   Future<void> _requestPermissions() async {
@@ -137,13 +140,13 @@ class _MyAppState extends State<MyApp> {
                 child: MaterialButton(
                   onPressed: _showOverlayWindow,
                   textColor: Colors.white,
+                  color: Colors.deepOrange,
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: !_isShowingWindow
                       ? Text("Show system alert window")
                       : !_isUpdatedWindow
                           ? Text("Update system alert window")
                           : Text("Close system alert window"),
-                  color: Colors.deepOrange,
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                 ),
               ),
               Padding(
@@ -151,9 +154,9 @@ class _MyAppState extends State<MyApp> {
                 child: MaterialButton(
                   onPressed: () => SystemAlertWindow.sendMessageToOverlay("message from main"),
                   textColor: Colors.white,
-                  child: Text("send message to overlay"),
                   color: Colors.deepOrange,
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text("send message to overlay"),
                 ),
               ),
               TextButton(

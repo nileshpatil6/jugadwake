@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 
 class CustomOverlay extends StatefulWidget {
+  const CustomOverlay({Key? key}) : super(key: key);
+
   @override
   State<CustomOverlay> createState() => _CustomOverlayState();
 }
@@ -30,7 +32,7 @@ class _CustomOverlayState extends State<CustomOverlay> {
   }
 
   void callBackFunction(String tag) {
-    print("Got tag " + tag);
+    print("Got tag $tag");
     mainAppPort ??= IsolateNameServer.lookupPortByName(
       _mainAppPort,
     );
@@ -39,7 +41,7 @@ class _CustomOverlayState extends State<CustomOverlay> {
   }
 
   Widget overlay() {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -65,7 +67,7 @@ class _CustomOverlayState extends State<CustomOverlay> {
                 ),
                 TextButton(
                   style: ButtonStyle(
-                    overlayColor: MaterialStateProperty.all(Colors.transparent),
+                    overlayColor: WidgetStateProperty.all(Colors.transparent),
                   ),
                   onPressed: () {
                     callBackFunction("Close");
@@ -96,7 +98,7 @@ class _CustomOverlayState extends State<CustomOverlay> {
           ),
           TextButton(
             style: ButtonStyle(
-              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              overlayColor: WidgetStateProperty.all(Colors.transparent),
             ),
             onPressed: () {
               callBackFunction("Action");

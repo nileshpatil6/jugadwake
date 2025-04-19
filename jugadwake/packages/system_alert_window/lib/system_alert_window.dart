@@ -9,7 +9,7 @@ enum SystemWindowPrefMode { DEFAULT, OVERLAY, BUBBLE }
 
 class SystemAlertWindow {
   ///Channel name to handle the communication between flutter and platform specific code
-  static const MethodChannel _channel = const MethodChannel(Constants.CHANNEL, JSONMethodCodec());
+  static const MethodChannel _channel = MethodChannel(Constants.CHANNEL, JSONMethodCodec());
 
   static const BasicMessageChannel _overlayMessageChannel = BasicMessageChannel(Constants.MESSAGE_CHANNEL, JSONMessageCodec());
 
